@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor*/
 @Data
-@NoArgsConstructor//возможно нужно будет удалить
+@NoArgsConstructor(force = true)//возможно нужно будет удалить
 public class Buy_tech {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

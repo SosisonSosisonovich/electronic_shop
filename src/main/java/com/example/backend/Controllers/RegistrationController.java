@@ -4,10 +4,9 @@ package com.example.backend.Controllers;
 import com.example.backend.Entity.Customer;
 import com.example.backend.Services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -17,7 +16,12 @@ public class RegistrationController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping
+    @GetMapping("/registration")
+    public void registration(Model model){
+        model.addAttribute("userForm", new Customer());
+    }
+
+    @PostMapping("/registration")
     public boolean addNewCustomer(@RequestBody Customer customer){
         System.out.println("Чувак зареган");
         return customerService.addCustomer(customer);

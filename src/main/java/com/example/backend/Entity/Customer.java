@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor*/
 @Data
-@NoArgsConstructor//возможно нужно будет удалить
+@NoArgsConstructor(force = true)//возможно нужно будет удалить
 public class Customer implements UserDetails {
 
     @Id
@@ -38,9 +38,12 @@ public class Customer implements UserDetails {
     private String email;
 
     @Column(nullable = false)
-    @Setter(AccessLevel.PROTECTED)
+    //@Setter(AccessLevel.PROTECTED)
     @NonNull
     private String password;
+
+    @Transient
+    private String passwordConfirm;
 
     @OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY)
     private Set<ShoppingCart> shoppingCarts;

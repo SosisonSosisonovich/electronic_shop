@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer")
 public class CustomerController {
     //put, post, delete, get <-- команды запросов
+
+    //@ResponseBody
     @Autowired
     private CustomerService customerService;
 

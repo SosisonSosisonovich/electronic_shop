@@ -11,12 +11,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "customer")
-/*@Getter//через lombok = public Long getId(){return id}
-@Setter//через lombok = public Long setId(Long id){this.id = id}
-@NoArgsConstructor
-@AllArgsConstructor*/
 @Data
-@NoArgsConstructor(force = true)//возможно нужно будет удалить
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)//возможно нужно будет удалить
+@RequiredArgsConstructor
 public class Customer implements UserDetails {
 
     @Id

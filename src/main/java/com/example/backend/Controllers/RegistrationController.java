@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
-
+    /*контроллер, который отвечает за регистрацию*/
     @Autowired
     private CustomerService customerService;
+    private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/registration")
+    /*@GetMapping("/registration")
     public void registration(Model model){
         model.addAttribute("userForm", new Customer());
-    }
+    }*/
 
     @PostMapping("/registration")
     public boolean addNewCustomer(@RequestBody Customer customer){

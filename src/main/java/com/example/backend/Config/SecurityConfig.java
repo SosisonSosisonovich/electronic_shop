@@ -1,4 +1,4 @@
-/*package com.example.backend.Config;
+package com.example.backend.Config;
 
 import com.example.backend.Entity.Customer;
 import com.example.backend.Repositories.CustomerRepository;
@@ -43,4 +43,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
-}*/
+}

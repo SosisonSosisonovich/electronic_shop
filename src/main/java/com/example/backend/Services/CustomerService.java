@@ -1,21 +1,26 @@
 package com.example.backend.Services;
 
 
+import com.example.backend.Config.SecurityConfig;
 import com.example.backend.Entity.Customer;
 import com.example.backend.Repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService{
+public class CustomerService implements UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
 
-    /*@Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;*/
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public ResponseEntity<?> getCustomer(Integer id){
         Customer customer = customerRepository.findById(id).orElse(null);
@@ -49,5 +54,10 @@ public class CustomerService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 @Table(name = "customer")
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)//возможно нужно будет удалить
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class Customer{
 

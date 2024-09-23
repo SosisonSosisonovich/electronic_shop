@@ -16,7 +16,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/{id}")
     public Product getProduct(@PathVariable("id") Integer id){
         return productService.getProduct(id);
     }
@@ -26,7 +26,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/search/{name}")
+    @GetMapping("/{name}")
     public List<Product> getProductByName(String name){
         return productService.getProduct(name);
     }

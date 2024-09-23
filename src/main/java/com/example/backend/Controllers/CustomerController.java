@@ -26,7 +26,7 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllCustomers(){
+    public Iterable<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
 }

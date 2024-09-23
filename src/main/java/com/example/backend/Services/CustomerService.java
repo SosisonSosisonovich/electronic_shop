@@ -26,9 +26,8 @@ public class CustomerService{
         return customerRepository.findByNameAndSurname(name, surname);
     }
 
-    public ResponseEntity<Customer> getAllCustomers(){ //подумать
-        Iterable<Customer> customer = customerRepository.findAll();
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Iterable<Customer> getAllCustomers(){ //подумать
+        return customerRepository.findAll();
     }
 
     public boolean addCustomer(Customer newCustomer){

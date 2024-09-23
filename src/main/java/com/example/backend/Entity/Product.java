@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor*/
 @Data
-@NoArgsConstructor//возможно нужно будет удалить
+@NoArgsConstructor(force = true)//возможно нужно будет удалить
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

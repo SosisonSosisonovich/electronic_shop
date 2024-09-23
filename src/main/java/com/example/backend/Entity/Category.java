@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor*/
 @Data
-@NoArgsConstructor//возможно нужно будет удалить
+@NoArgsConstructor(force = true)//возможно нужно будет удалить
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Category {
 
     @Column(unique = true, nullable = false)
     @NonNull
-    private String name_category;
+    private String category_name;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     @NonNull

@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)//возможно нужно будет удалить
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Customer implements UserDetails {
+public class Customer{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,35 +44,4 @@ public class Customer implements UserDetails {
 
     @OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY)
     private Set<ShoppingCart> shoppingCarts;
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

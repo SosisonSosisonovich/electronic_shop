@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService implements UserDetailsService {
+public class CustomerService{
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -54,10 +54,5 @@ public class CustomerService implements UserDetailsService {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
     }
 }

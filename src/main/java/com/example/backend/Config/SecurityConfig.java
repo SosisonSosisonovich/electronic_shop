@@ -30,7 +30,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers("/auth/**").permitAll()  // Открываем доступ для маршрутов аутентификации
+                        .antMatchers("/api/auth/**").permitAll()  // Открываем доступ для маршрутов аутентификации
                         .anyRequest().authenticated()             // Остальные запросы требуют авторизации
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // JWT-фильтр

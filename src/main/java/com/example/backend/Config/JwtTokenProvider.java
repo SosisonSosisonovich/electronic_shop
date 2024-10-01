@@ -11,8 +11,8 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    private final String JWT_SECRET = "secretKey";  // Лучше вынести в конфигурацию
-    private final long JWT_EXPIRATION = 604800000L; // 7 дней
+    private final String JWT_SECRET = "secretKey";  // секрет для jwt-токена, лучше вынести в конфигурацию
+    private final long JWT_EXPIRATION = 604800000L; // срок хранения jwt-токена в милисекундах, 7 дней
 
     public String generateToken(String email) {
         Date now = new Date();

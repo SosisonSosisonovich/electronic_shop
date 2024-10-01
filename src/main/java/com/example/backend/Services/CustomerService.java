@@ -1,15 +1,12 @@
 package com.example.backend.Services;
 
 
-import com.example.backend.Config.SecurityConfig;
+import com.example.backend.DTO.RegisterRequest;
 import com.example.backend.Entity.Customer;
 import com.example.backend.Repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +17,7 @@ public class CustomerService{
     private CustomerRepository customerRepository;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    BCryptPasswordEncoder passwordEncoder;
 
     public ResponseEntity<?> getCustomer(Integer id){
         Customer customer = customerRepository.findById(id).orElse(null);
@@ -35,17 +32,31 @@ public class CustomerService{
         return customerRepository.findAll();
     }
 
-    public boolean addCustomer(Customer newCustomer){
+    /*public boolean addCustomer(RegisterRequest newCustomer){
         Customer customer = customerRepository.findByEmail(newCustomer.getEmail());
 
         if (customer != null){
             System.out.println("чувак уже есть!");
             return false;
         }
-        customer.setPassword(customer.getPassword());
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
 
         customerRepository.save(newCustomer);
         return true;
+    }*/
+
+    public Customer addCustomer(RegisterRequest registerRequest){
+        if(customerRepository.existsByEmail(registerRequest.getEmail())){
+            throw new IllegalArgumentException();
+        }
+
+        Customer customer = new Customer();
+        customer.setName(registerRequest.getName());
+        customer.setSurname(registerRequest.getSurname());
+        customer.setEmail(registerRequest.getEmail());
+        customer.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+
+        return customerRepository.save(customer);
     }
 
     public boolean deleteCustomer(Integer id){

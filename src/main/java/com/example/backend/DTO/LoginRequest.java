@@ -1,17 +1,22 @@
 package com.example.backend.DTO;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class LoginRequest {
     private String email;
     private String password;
 
     // Конструкторы
-    public LoginRequest() {
+    /*public LoginRequest() {
     }
 
     public LoginRequest(String email, String password) {
         this.email = email;
         this.password = password;
-    }
+    }*/
 
     // Геттеры и сеттеры
     public String getEmail() {

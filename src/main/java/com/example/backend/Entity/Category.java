@@ -8,10 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "category")
-/*@Getter//через lombok = public Long getId(){return id}
-@Setter//через lombok = public Long setId(Long id){this.id = id}
-@NoArgsConstructor
-@AllArgsConstructor*/
 @Data
 @NoArgsConstructor(force = true)//возможно нужно будет удалить
 public class Category {
@@ -21,9 +17,9 @@ public class Category {
     @NonNull
     private Integer category_id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "category_name", unique = true, nullable = false)
     @NonNull
-    private String category_name;
+    private String name;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     @NonNull

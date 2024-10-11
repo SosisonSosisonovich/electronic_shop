@@ -1,6 +1,5 @@
 package com.example.backend.Config;
 
-import com.example.backend.Services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,39 +14,43 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
-    //private final CustomUserDetailsService customDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
-       // this.customDetailsService = customDetailsService;
+    // Внедрение через конструктор
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsService userDetailsService) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.userDetailsService = userDetailsService;
     }
 
+    // Определяем парольный энкодер для шифрования паролей
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // Конфигурация цепочки фильтров безопасности
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf().disable() // Отключаем CSRF для REST API
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers("/api/auth/**").permitAll()  // Открываем доступ для маршрутов аутентификации
-                        .anyRequest().authenticated()             // Остальные запросы требуют авторизации
+                        .antMatchers("/api/auth/**").permitAll()  // Разрешаем доступ к аутентификации и регистрации
+                        .anyRequest().authenticated()             // Все остальные запросы требуют аутентификации
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // JWT-фильтр
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Добавляем JWT-фильтр
 
         return http.build();
     }
 
+    // Конфигурация AuthenticationManager для работы с аутентификацией
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) throws Exception {
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder)
+                .passwordEncoder(passwordEncoder())
                 .and()
                 .build();
     }

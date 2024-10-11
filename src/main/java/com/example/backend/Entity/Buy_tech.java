@@ -5,13 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-/*@Table(name = "buy_tech")
-@Getter//через lombok = public Long getId(){return id}
-@Setter//через lombok = public Long setId(Long id){this.id = id}
-@NoArgsConstructor
-@AllArgsConstructor*/
 @Data
-@NoArgsConstructor(force = true)//возможно нужно будет удалить
+@NoArgsConstructor(force = true)
 public class Buy_tech {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

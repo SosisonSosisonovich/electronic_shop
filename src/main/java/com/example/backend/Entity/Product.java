@@ -7,12 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "product")
-/*@Getter//через lombok = public Long getId(){return id}
-@Setter//через lombok = public Long setId(Long id){this.id = id}
-@NoArgsConstructor
-@AllArgsConstructor*/
 @Data
-@NoArgsConstructor(force = true)//возможно нужно будет удалить
+@NoArgsConstructor(force = true)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

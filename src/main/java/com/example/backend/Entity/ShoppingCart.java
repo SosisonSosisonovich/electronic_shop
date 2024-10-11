@@ -7,12 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "shopping_cart")
-/*@Getter//через lombok = public Long getId(){return id}
-@Setter//через lombok = public Long setId(Long id){this.id = id}
-@NoArgsConstructor
-@AllArgsConstructor*/
 @Data
-@NoArgsConstructor(force = true)//возможно нужно будет удалить
+@NoArgsConstructor(force = true)
 public class ShoppingCart {
 
     @Id

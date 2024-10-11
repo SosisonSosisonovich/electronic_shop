@@ -1,7 +1,6 @@
 package com.example.backend.Controllers;
 
 import com.example.backend.Entity.Product;
-import com.example.backend.Repositories.ProductRepository;
 import com.example.backend.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

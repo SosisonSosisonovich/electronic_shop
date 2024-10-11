@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/category")//указывается, что все методы контроллера относятся к к URl-адресы /category
+@RequestMapping("/category")//указывается, что все методы контроллера относятся к URl-адресы /category
 public class CategoryController {
 
     @Autowired

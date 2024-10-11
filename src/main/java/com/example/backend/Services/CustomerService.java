@@ -32,19 +32,6 @@ public class CustomerService{
         return customerRepository.findAll();
     }
 
-    /*public boolean addCustomer(RegisterRequest newCustomer){
-        Customer customer = customerRepository.findByEmail(newCustomer.getEmail());
-
-        if (customer != null){
-            System.out.println("чувак уже есть!");
-            return false;
-        }
-        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-
-        customerRepository.save(newCustomer);
-        return true;
-    }*/
-
     public Customer addCustomer(RegisterRequest registerRequest){
         if(customerRepository.existsByEmail(registerRequest.getEmail())){
             throw new IllegalArgumentException();
@@ -66,4 +53,5 @@ public class CustomerService{
         }
         return false;
     }
+
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "customer")
 @Data
-@NoArgsConstructor(force = true)//возможно нужно будет удалить
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class Customer{
 
@@ -26,7 +26,6 @@ public class Customer{
     private String email;
 
     @Column(nullable = false)
-    //@Setter(AccessLevel.PROTECTED)
     private String password;
 
     @Transient

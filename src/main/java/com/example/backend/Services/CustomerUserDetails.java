@@ -1,18 +1,17 @@
 package com.example.backend.Services;
 
 import com.example.backend.Entity.Customer;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+@AllArgsConstructor
 public class CustomerUserDetails implements UserDetails  {
 
     private Customer customer;
 
-    public CustomerUserDetails(Customer customer){
-        this.customer = customer;
-    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();

@@ -1,8 +1,8 @@
-package com.example.backend.Config;
+package com.example.backend.JWT;
 
 public class JwtAuthenticationResponse {
 
-    private String accessToken;
+    private String accessToken; // хранит в себе jwt-токен, нужен для использования защищенных эндпоинтов
     private String tokenType = "Bearer";
 
     public JwtAuthenticationResponse(String accessToken) {

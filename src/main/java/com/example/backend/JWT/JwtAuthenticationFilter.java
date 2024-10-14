@@ -1,4 +1,4 @@
-package com.example.backend.Config;
+package com.example.backend.JWT;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

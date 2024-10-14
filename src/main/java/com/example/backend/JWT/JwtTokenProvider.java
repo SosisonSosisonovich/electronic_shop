@@ -1,17 +1,20 @@
-package com.example.backend.Config;
+package com.example.backend.JWT;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
-    private final String JWT_SECRET = "secretKey";  // секрет для jwt-токена, лучше вынести в конфигурацию
-    private final long JWT_EXPIRATION = 604800000L; // срок хранения jwt-токена в милисекундах, 7 дней
+    @Value("${jwt.secret}")
+    private String JWT_SECRET;// секрет для jwt-токена, ключ хранится в файле конфигурации
+
+    @Value("${jwt.expiration}")
+    private  long JWT_EXPIRATION; // срок хранения jwt-токена в милисекундах, 7 дней, время хранится в файле конфигурации
 
     public String generateToken(String email) {
         Date now = new Date();
@@ -39,20 +42,7 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
             return true;
         } catch (Exception ex) {
-            // Логирование ошибок
             return false;
         }
-    }
-
-    public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody().getSubject();
-    }
-
-    public String getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
     }
 }

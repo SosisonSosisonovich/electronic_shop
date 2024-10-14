@@ -1,12 +1,12 @@
 package com.example.backend.Controllers;
 
-import com.example.backend.Config.JwtAuthenticationResponse;
-import com.example.backend.Config.JwtTokenProvider;
+import com.example.backend.JWT.JwtAuthenticationResponse;
+import com.example.backend.JWT.JwtTokenProvider;
 import com.example.backend.DTO.LoginRequest;
 import com.example.backend.DTO.RegisterRequest;
-import com.example.backend.Services.CustomUserDetailsService;
 import com.example.backend.Services.CustomerService;
 import com.example.backend.Services.CustomerUserDetails;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -26,12 +27,12 @@ public class AuthController {
     private final JwtTokenProvider tokenProvider;
 
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider,
+   /* public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider,
                           CustomerService customerService, CustomUserDetailsService customerDetailsService) {
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
         this. customerService = customerService;
-    }
+    }*/
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {

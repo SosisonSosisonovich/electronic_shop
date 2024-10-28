@@ -9,5 +9,5 @@ public class CategoryDTO {
 
     private Integer category_id;
 
-    private String name_category;
+    private String name;
 }

@@ -22,5 +22,7 @@ public class ProductDTO {
 
     private int sale;
 
-    private Set<Category> category_id;
+    //private Set<Category> category_id;
+
+    private Integer category_id;
 }

@@ -30,11 +30,15 @@ public class Product {
     @Column(nullable = false)
     private int sale;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    /*@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "category_product",
      joinColumns = @JoinColumn(name = "product_id"),
      inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories; */
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category categories;
 
     @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)
     private Set<Photo> photo_id;

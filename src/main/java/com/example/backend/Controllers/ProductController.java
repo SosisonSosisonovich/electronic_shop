@@ -4,6 +4,7 @@ import com.example.backend.DTO.CategoryDTO;
 import com.example.backend.DTO.ProductDTO;
 import com.example.backend.Entity.Category;
 import com.example.backend.Entity.Product;
+import com.example.backend.Repositories.CategoryRepository;
 import com.example.backend.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    CategoryRepository categoryRepo;
 
     /*@GetMapping("/{id}")
     public Product getProduct(@PathVariable("id") Integer id){
@@ -84,25 +87,32 @@ public class ProductController {
 
     private ProductDTO convertToDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
+
         productDTO.setProduct_id(product.getProduct_id());
         productDTO.setName(product.getName());
         productDTO.setDescription(product.getDescription());
         productDTO.setAmount(product.getAmount());
         productDTO.setPrice(product.getPrice());
         productDTO.setSale(product.getSale());
-        productDTO.setCategory_id(product.getCategories());
+        productDTO.setCategory_id(product.getCategories().getCategory_id());
+        //productDTO.setCategory_id(product.getCategories().getCategory_id());
         return productDTO;
     }
 
     private Product convertToEntity(ProductDTO productDTO) {
         Product product = new Product();
+
         product.setProduct_id(productDTO.getProduct_id());
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setAmount(productDTO.getAmount());
         product.setPrice(productDTO.getPrice());
         product.setSale(productDTO.getSale());
-        product.setCategories(productDTO.getCategory_id());
+
+        Category category = categoryRepo.findById(productDTO.getCategory_id())
+                .orElseThrow(() -> new RuntimeException("Категория не найдена."));
+
+        product.setCategories(category);
         return product;
     }
 }

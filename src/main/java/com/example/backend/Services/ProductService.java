@@ -12,11 +12,11 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product getProduct(Integer id){
+    public Product getProductById(Integer id){
         return productRepository.findById(id).orElse(null);
     }
 
-    public List<Product> getProduct(String name){
+    public Product getProductByName(String name){
         return productRepository.findByName(name);
     }
 

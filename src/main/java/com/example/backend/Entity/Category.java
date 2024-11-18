@@ -21,6 +21,5 @@ public class Category {
     private String name;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
-    //@NonNull
     private Set<Product> product_id;
 }

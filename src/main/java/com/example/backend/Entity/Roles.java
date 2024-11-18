@@ -21,7 +21,4 @@ public class Roles {
 
     @Column(name = "role",unique = true, nullable = false)
     private String role;
-
-    /*@OneToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<Customer> customers;*/
 }

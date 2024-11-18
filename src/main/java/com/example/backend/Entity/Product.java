@@ -3,7 +3,6 @@ package com.example.backend.Entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -39,9 +38,6 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category categories;
-
-    /*@OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)
-    private Set<Photo> photo_id;*/
 
     private String imageUrl;
 }

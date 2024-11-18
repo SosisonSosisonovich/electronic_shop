@@ -17,18 +17,6 @@ public class JwtTokenProvider {
     @Value("${jwt.expiration}")
     private  long JWT_EXPIRATION; // срок хранения jwt-токена в милисекундах, 7 дней, время хранится в файле конфигурации
 
-    /*public String generateToken(String email) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
-
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
-                .compact();
-    }*/
-
     public String generateToken(String email, List<String> roles) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);

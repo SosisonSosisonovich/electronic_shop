@@ -29,7 +29,11 @@ public class Customer{
     private String password;
 
     @Transient
-    private String passwordConfirm;
+    private String passwordConfirm; //не нужно
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Roles roles;
 
     @OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY)
     private Set<ShoppingCart> shoppingCarts;

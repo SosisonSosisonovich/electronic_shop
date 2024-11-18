@@ -4,6 +4,7 @@ import com.example.backend.JWT.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,6 +43,10 @@ public class SecurityConfig {
                 .csrf().disable() // Отключаем CSRF для REST API
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/api/auth/**").permitAll()  // Разрешаем доступ к аутентификации и регистрации
+                        .antMatchers(HttpMethod.GET, "/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN") // Только админы имеют право отправлять запросы post, put, delete
+                        .antMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
                         .anyRequest().authenticated()             // Все остальные запросы требуют аутентификации
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Добавляем JWT-фильтр

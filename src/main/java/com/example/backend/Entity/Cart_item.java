@@ -7,11 +7,11 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor(force = true)
-public class Buy_tech {
+public class Cart_item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Integer buy_tech_id;
+    private Integer cart_item_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product_id;

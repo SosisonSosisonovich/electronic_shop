@@ -24,7 +24,7 @@ public class ShoppingCart {
 
     @OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY) //тоже подумать
     @NonNull
-    private Set<Buy_tech> buy_tech_id;
+    private Set<Cart_item> cart_item_id;
 
     @Column(nullable = false)
     @NonNull

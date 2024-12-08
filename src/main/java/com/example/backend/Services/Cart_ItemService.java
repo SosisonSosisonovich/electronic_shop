@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 
+import com.example.backend.DTO.Cart_ItemDTO;
 import com.example.backend.Entity.Cart_item;
 import com.example.backend.Repositories.Cart_ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ public class Cart_ItemService {
     @Autowired
     private Cart_ItemRepository cartItemRepository;
 
-    public Cart_item getCart_item(Integer id){
+    public Cart_ItemDTO getCart_item(Integer id){
         return cartItemRepository.findById(id).orElse(null);
     }
 

@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.DTO.CategoryDTO;
 import com.example.backend.Entity.Category;
+import com.example.backend.Mappers.CategoryMappers;
 import com.example.backend.Services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private CategoryMappers categoryMappers;
+
     //получить категорию
     /*@GetMapping("/{id}")
     public Category getCategory(@PathVariable("id") Integer id){
@@ -25,7 +29,7 @@ public class CategoryController {
     @GetMapping("/search/{name}")
     public CategoryDTO getCategoryByName(@PathVariable("name") String name) {
         Category category = categoryService.getCategoryByName(name);
-        return convertToDTO(category);
+        return categoryMappers.toDTO(category);
     }
 
     @GetMapping("/{id}")
@@ -47,7 +51,7 @@ public class CategoryController {
     @GetMapping()
     public List<CategoryDTO> getAllCategories(){
         List<Category> categories = (List<Category>) categoryService.getAllCategories();
-        return categories.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return categoryMappers.toDTOList(categories);
     }
 
 
@@ -59,9 +63,9 @@ public class CategoryController {
 
     @PostMapping
     public CategoryDTO addNewCateegory(@RequestBody CategoryDTO name){
-        Category category = convertToEntity(name);
+        Category category = categoryMappers.toEntity(name);
         Category savedCategory = categoryService.addNewCategory(category);
-        return convertToDTO(savedCategory);
+        return categoryMappers.toDTO(savedCategory);
     }
 
     /*//обновить категорию
@@ -73,10 +77,10 @@ public class CategoryController {
 
     @PutMapping("/update/{id}")
     public CategoryDTO updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO name){
-        Category category = convertToEntity(name);
+        Category category = categoryMappers.toEntity(name);
         category.setCategory_id(id);
         Category updatedCategory = categoryService.addNewCategory(category);
-        return convertToDTO(updatedCategory);
+        return categoryMappers.toDTO(updatedCategory);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -84,7 +88,7 @@ public class CategoryController {
         categoryService.deleteCategoryById(id);
     }
 
-    private CategoryDTO convertToDTO(Category category) {
+   /* private CategoryDTO convertToDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setCategory_id(category.getCategory_id());
         categoryDTO.setName(category.getName());
@@ -96,6 +100,6 @@ public class CategoryController {
         category.setCategory_id(categoryDTO.getCategory_id());
         category.setName(categoryDTO.getName());
         return category;
-    }
+    }*/
 
 }

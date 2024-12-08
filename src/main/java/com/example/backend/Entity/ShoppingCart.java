@@ -3,6 +3,7 @@ package com.example.backend.Entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -22,12 +23,12 @@ public class ShoppingCart {
     @NonNull
     private Customer customer_id;
 
-    @OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY) //тоже подумать
-    @NonNull
-    private Set<Cart_item> cart_item_id;
-
     @Column(nullable = false)
     @NonNull
-    private Long total_count;
+    private BigDecimal total_price;
+
+    /*@OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY) //тоже подумать
+    @NonNull
+    private Set<Cart_item> cart_item_id;*/
 
 }

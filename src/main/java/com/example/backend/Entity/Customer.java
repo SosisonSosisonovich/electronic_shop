@@ -37,4 +37,7 @@ public class Customer{
 
     @OneToMany(mappedBy = "cart_id", fetch = FetchType.LAZY)
     private Set<ShoppingCart> shoppingCarts;
+
+    @OneToMany(mappedBy = "order_id")
+    private Set<Order> orders;
 }

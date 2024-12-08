@@ -1,10 +1,7 @@
 package com.example.backend.DTO;
 
-import com.example.backend.Entity.Category;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -22,7 +19,7 @@ public class ProductDTO {
 
     private int sale;
 
-    //private Set<Category> category_id;
-
     private Integer category_id;
+
+    private String imageUrl;
 }

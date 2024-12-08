@@ -1,27 +1,29 @@
 package com.example.backend.Entity;
 
-import com.example.backend.DTO.Cart_ItemDTO;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cart_item")
+@Table(name = "order_item")
 @Data
 @NoArgsConstructor(force = true)
-public class Cart_item extends Cart_ItemDTO {
+public class Order_item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Integer cart_item_id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", referencedColumnName = "cart_id",nullable = false)
-    private ShoppingCart cart_id;
+    private Integer order_item_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product_id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id",nullable = false)
+    private Order order_id;
+
     @Column(nullable = false)
     private int amount;
+
 }

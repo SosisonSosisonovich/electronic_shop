@@ -4,6 +4,7 @@ import com.example.backend.DTO.CategoryDTO;
 import com.example.backend.DTO.ProductDTO;
 import com.example.backend.Entity.Category;
 import com.example.backend.Entity.Product;
+import com.example.backend.Mappers.ProductMappers;
 import com.example.backend.Repositories.CategoryRepository;
 import com.example.backend.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @Autowired
-    CategoryRepository categoryRepo;
+    private CategoryRepository categoryRepo;
+
+    @Autowired
+    private ProductMappers productMappers;
 
     /*@GetMapping("/{id}")
     public Product getProduct(@PathVariable("id") Integer id){
@@ -34,7 +38,7 @@ public class ProductController {
         productDTO.setProduct_id(product.getProduct_id());
         productDTO.setName(product.getName());*/
 
-        return convertToDTO(product);
+        return productMappers.toDTO(product);
     }
 
     /*@GetMapping("/{name}")
@@ -45,7 +49,7 @@ public class ProductController {
     @GetMapping("/search/{name}")
     public ProductDTO getProductByName(@PathVariable("name") String name) {
         Product product = productService.getProductByName(name);
-        return convertToDTO(product);
+        return productMappers.toDTO(product);
     }
 
    /* @GetMapping
@@ -56,7 +60,7 @@ public class ProductController {
     @GetMapping()
     public List<ProductDTO> getAllProducts(){
         List<Product> products = (List<Product>) productService.getAllProducts();
-        return products.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return productMappers.toDTOList(products);
     }
 
     /*@PostMapping("/new")
@@ -66,17 +70,17 @@ public class ProductController {
 
     @PostMapping
     public ProductDTO addNewProduct(@RequestBody ProductDTO name){
-        Product product = convertToEntity(name);
+        Product product = productMappers.toEntity(name);
         Product savedProduct = productService.addNewProduct(product);
-        return convertToDTO(savedProduct);
+        return productMappers.toDTO(savedProduct);
     }
 
     @PutMapping("/update/{id}")
     public ProductDTO updateProduct(@PathVariable Integer id, @RequestBody ProductDTO name){
-        Product product = convertToEntity(name);
+        Product product = productMappers.toEntity(name);
         product.setProduct_id(id);
         Product updatedProduct = productService.addNewProduct(product);
-        return convertToDTO(updatedProduct);
+        return productMappers.toDTO(updatedProduct);
     }
 
 
@@ -85,7 +89,7 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    private ProductDTO convertToDTO(Product product) {
+    /*private ProductDTO convertToDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
 
         productDTO.setProduct_id(product.getProduct_id());
@@ -95,7 +99,8 @@ public class ProductController {
         productDTO.setPrice(product.getPrice());
         productDTO.setSale(product.getSale());
         productDTO.setCategory_id(product.getCategories().getCategory_id());
-        //productDTO.setCategory_id(product.getCategories().getCategory_id());
+        productDTO.setImageUrl(product.getImageUrl());
+
         return productDTO;
     }
 
@@ -108,11 +113,13 @@ public class ProductController {
         product.setAmount(productDTO.getAmount());
         product.setPrice(productDTO.getPrice());
         product.setSale(productDTO.getSale());
+        product.setImageUrl(productDTO.getImageUrl());
 
         Category category = categoryRepo.findById(productDTO.getCategory_id())
                 .orElseThrow(() -> new RuntimeException("Категория не найдена."));
 
         product.setCategories(category);
+
         return product;
-    }
+    }*/
 }

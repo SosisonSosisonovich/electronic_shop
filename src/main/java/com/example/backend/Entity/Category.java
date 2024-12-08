@@ -20,6 +20,6 @@ public class Category {
     @Column(name = "category_name", unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private Set<Product> product_id;
 }
